@@ -3,7 +3,7 @@ import sys
 import argparse
 from datetime import datetime
 
-def write_log(log_message, daily_log_path='.daily_log'):
+def write_log(log_message, daily_log_path=os.path.expanduser('~/.daily_log')):
     with open(daily_log_path, 'a') as f:
         f.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: {log_message}\n")
 

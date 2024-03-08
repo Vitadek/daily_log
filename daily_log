@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+import sys
+import argparse
+from datetime import datetime
+
+def write_log(log_message, daily_log_path='.daily_log'):
+    with open(daily_log_path, 'a') as f:
+        f.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: {log_message}\n")
+
+def display_log(daily_log_path='/home/diego.uy/bin/.daily_log'):
+    with open(daily_log_path, 'r') as f:
+        print(f.read(), end='')
+
+def main(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-w', '--write', action='store_true', help='The log message to write.')
+
+    args = parser.parse_args(args)
+
+    if args.write:
+        log_message = input("Please enter your log message: ")
+        write_log(log_message)
+        print(log_message)
+    else:
+        display_log()
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
